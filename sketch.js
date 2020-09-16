@@ -15,7 +15,7 @@ var divisionHeight=300;
 var score =0;
 
 function preload(){
-  mousePressed();
+  // mousePressed();
   calculateScore();
 }
 
@@ -88,13 +88,11 @@ function mousePressed(){
     turn++;
     particles=new Particle(mouseX,10,10);
   }
-}
 
-function calculateScore(){
-    if(particles!==null)
-    {
-     particles.display();
-     if(particles.body.position.y>760)
+  if(particles!==null)
+  {
+    particles.display();
+    if(particles.body.position.y>760)
      {
        if(particles.body.position.x<300)
        {
@@ -104,4 +102,8 @@ function calculateScore(){
        }
      }
    }
+}
+
+function calculateScore(){
+
 }
