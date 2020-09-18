@@ -67,41 +67,71 @@ function draw() {
   Engine.update(engine);
   
   ground.display();
+  if(gameState==="PLAY")
+  {
   
-   for (var i = 0; i < plinkos.length; i++) {
-     
-     plinkos[i].display();
-     
-   }
+    for (var i = 0; i < plinkos.length; i++) {
+      
+      plinkos[i].display();
+      
+    }
 
-   for (var k = 0; k < divisions.length; k++) {
-     
-     divisions[k].display();
-   }
+    for (var k = 0; k < divisions.length; k++) {
+      
+      divisions[k].display();
+    }
 
-  textSize(20)
-  text("Score : "+score,20,30);
+    textSize(20)
+    text("Score : "+score,20,30);
+     
+      if(particles!==undefined)
+     {
+        particles.display();
+        if(particles.body.position.y>760)
+        {
+          if(particles.body.position.x<320)
+          {
+            score=score+500;
+            particles=undefined;
+          } else if(particles.body.position.x<560)
+          {
+            score=score+100;
+            particles=undefined;
+          } else if(particles.body.position.x>560)
+          {
+            score=score+200;
+            particles=undefined;
+          }
+        }
+      }
+
+    if (turn>=6 && particles===undefined){
+      gameState="END"
+    }
+  } else if (gameState==="END")
+  {
+    textSize(60);
+    text("Score : "+score,400,400);
+    textSize(20);
+    text("Press SPACE to restart.",400,600);
+    if(keyIsDown(32))
+    {
+      gameState="PLAY";
+      turn=1;
+      score=0;
+    }
+  } 
 }
 function mousePressed(){
   if(turn<=5)
   {
     turn++;
-    particles=new Particle(mouseX,10,10);
+    particles=new Particle(mouseX,30,10);
   }
+  
 
-  if(particles!==null)
-  {
-    particles.display();
-    if(particles.body.position.y>760)
-     {
-       if(particles.body.position.x<300)
-       {
-         score=score+500;
-         particles=null;
-         if(count>=5)gameState="end";
-       }
-     }
-   }
+
+
 }
 
 function calculateScore(){

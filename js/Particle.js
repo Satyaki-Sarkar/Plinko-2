@@ -2,7 +2,6 @@ class Particle {
     constructor(x, y,r) {
 
         var options ={
-            isStatic : true,
             restitution:0.4
         }
         this.r=r;
@@ -20,7 +19,6 @@ class Particle {
         push();
         translate(pos.x, pos.y);
         rotate(angle);
-        //imageMode(CENTER);
         noStroke();
         fill(this.color)
         ellipseMode(RADIUS);
